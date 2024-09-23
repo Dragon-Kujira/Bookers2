@@ -19,7 +19,6 @@ class BooksController < ApplicationController
   end
 
   def edit
-    is_matching_login_user
     @book = Book.find(params[:id])
     if @book.user == current_user
         render "edit"
@@ -38,6 +37,7 @@ class BooksController < ApplicationController
     @user = current_user
     @book1 = Book.find(params[:id])
     @book = Book.new
+    @book_comment = BookComment.new
   end
 
   def edit
