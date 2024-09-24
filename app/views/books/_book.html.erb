@@ -4,7 +4,6 @@
         <table class="table">
           <tbody>
             <tr>
-
             </tr>
             <tr>
               <th>name</th>
@@ -14,13 +13,25 @@
               <th>introduction</th>
               <th><%= user.introduction %></th>
             </tr>
+            <tr>
+            <th>follows</th>
+            <th><%= link_to user.followings.count, user_followings_path(user) %></th>
+            </tr>
+            <tr>
+            <th>followers</th>
+            <th><%= link_to user.followers.count, user_followers_path(user) %></th>
+            </tr>
           </tbody>
         </table>
-        <div class="row">
-          <a href="/users/<%= user.id %>/edit" class="btn btn-outline-secondary btn-block">
-            <i class="fas fa-user-cog" aria-hidden="true"></i>
-          </a>
-        </div>
+       <div class="row">
+        <% if current_user != user %>
+        <td><%= render "relationships/btn", user: user, options: { class: ""} %></td>
+        <% else %>
+        <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
+        <i class="fas fa-user-cog"></i>
+        <% end %>
+       <% end %>
+       </div>
         <h2 class="mt-3">
           New book
         </h2>
