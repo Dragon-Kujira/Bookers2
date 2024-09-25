@@ -16,7 +16,6 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="/">Bookers</a>
-
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -74,6 +73,9 @@
     </header>
     <main>
     <%= flash[:notice] %>
+    <div class="d-flex justify-content-center mb-2">
+       <%= render "searches/search" %>
+    </div>
     <%= yield %>
     </main>
     <footer>
