@@ -1,16 +1,16 @@
 class BooksController < ApplicationController
 
   def new
-   @book = Book.new
+   @book1 = Book.new
   end
 
   def create
     @user = current_user
-    @book = Book.new(book_params)
-    @book.user_id = current_user.id
-   if @book.save
+    @book1 = Book.new(book_params)
+    @book1.user_id = current_user.id
+   if @book1.save
       flash[:notice] = "You have creatad book successfully."
-   redirect_to book_path(@book.id)
+   redirect_to book_path(@book1.id)
    else
     @books = Book.all
     flash[:notice] = ' errors prohibited this obj from being saved:'
@@ -30,13 +30,13 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @books = Book.all
-    @book = Book.new
+    @book1 = Book.new
   end
 
   def show
     @user = current_user
-    @book1 = Book.find(params[:id])
-    @book = Book.new
+    @book = Book.find(params[:id])
+    @book1 = Book.new
     @book_comment = BookComment.new
   end
 

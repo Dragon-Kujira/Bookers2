@@ -2,47 +2,47 @@
 <p id="notice"></p>
   <div class="container px-5 px-sm-0">
     <div class="row">
-      <%= render 'books/book', user: @book1.user %>
+      <%= render 'books/book', user: @book.user %>
       <div class="col-md-8 offset-md-1">
         <h2>Book detail</h2>
         <table class="table table-hover table-inverse">
           <thead>
             <tr>
              <td>
-               <%= link_to user_path(@book1.user_id) do %>
-               <%= image_tag @book1.user.get_profile_image(100,100) %>
+               <%= link_to user_path(@book.user_id) do %>
+               <%= image_tag @book.user.get_profile_image(100,100) %>
                <br>
-               <%= @book1.user.name %>
+               <%= @book.user.name %>
                <% end %>
              </td>
 
              <td>
-              <%= link_to book_path(@book1.id) do %>
-              <%= @book1.title %>
+              <%= link_to book_path(@book.id) do %>
+              <%= @book.title %>
               <% end %>
              </td>
-              <td><%= @book1.body %></td>
-              <% if @book1.favorited_by?(current_user) %>
+              <td><%= @book.body %></td>
+              <% if @book.favorited_by?(current_user) %>
                 <td>
-                    <%= link_to book_favorites_path(@book1), method: :delete do %>
+                    <%= link_to book_favorites_path(@book), method: :delete do %>
                      <i class="fas fa-heart" style="color: red;"></i>
-                    <%= @book1.favorites.count %>
+                    <%= @book.favorites.count %>
                   <% end %>
                 </td>
                 <% else %>
                 <td>
-                  <%= link_to book_favorites_path(@book1), method: :post do %>
+                  <%= link_to book_favorites_path(@book), method: :post do %>
                     <i class="far fa-heart"></i>
-                    <%= @book1.favorites.count %>
+                    <%= @book.favorites.count %>
                   <% end %>
                 </td>
               <% end %>
               <td>
-                <%= "コメント数: #{@book1.book_comments.count}"%>
+                <%= "コメント数: #{@book.book_comments.count}"%>
               </td>
-              <% if @book1.user == current_user %>
-                <td><%= link_to "Edit", edit_book_path(@book1.id) , class: "btn btn-sm btn-success"%></td>
-                <td><%= link_to "Destroy", book_path(@book1.id) , method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-sm btn-danger"%></td>
+              <% if @book.user == current_user %>
+                <td><%= link_to "Edit", edit_book_path(@book.id) , class: "btn btn-sm btn-success"%></td>
+                <td><%= link_to "Destroy", book_path(@book.id) , method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-sm btn-danger"%></td>
               <% end %>
             </tr>
         </tbody>
@@ -50,7 +50,7 @@
       <table class="table">
           <tbody>
 
-            <% @book1.book_comments.each do |book_comment| %>
+            <% @book.book_comments.each do |book_comment| %>
             <tr>
               <td>
                   <%= link_to user_path(book_comment.user_id) do %>
@@ -68,7 +68,7 @@
           </tbody>
         </table>
         <div class="container">
-          <%= form_with model: [@book1, @book_comment] do |f| %>
+          <%= form_with model: [@book, @book_comment] do |f| %>
             <%= f.text_area :comment ,class: "form-control"%>
             <%= f.submit "送信" %>
           <% end %>
