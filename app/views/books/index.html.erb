@@ -25,7 +25,7 @@
           </thead>
           <tbody>
  <% @books.each do |book| %>
-    <tr>
+  <tr>
     <td>
     <%= link_to user_path(book.user_id) do %>
      <%= image_tag book.user.get_profile_image(80,80) %>
@@ -39,24 +39,10 @@
     <td>
     <%= book.body %>
     </td>
-  <% if book.favorited_by?(current_user) %>
-    <td>
-      <%= link_to book_favorites_path(book), method: :delete do %>
-         <i class="fas fa-heart" style="color: red;"></i>
-         <%= book.favorites.count %>
-      <% end %>
-     </td>
-     <% else %>
-    <td>
-       <%= link_to book_favorites_path(book), method: :post do %>
-         <i class="far fa-heart"></i>
-        <%= book.favorites.count %>
-       <% end %>
-     </td>
-  <% end %>
-    <td>
-    <%= "コメント数: #{book.book_comments.count}"%>
-    </td>
+       <td id="favorite_btn_<%= book.id %>">
+         <%= render "favorites/favorite-btn", book: book %>
+       </td>
+  <td class="comments-count">コメント数: <%= book.book_comments.count %></td>
    </tr>
   <% end %>
   </tbody>

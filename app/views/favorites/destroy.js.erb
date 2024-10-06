@@ -1,0 +1,5 @@
+$("#favorite_btn_<%= @book.id %>").html("<%= j(render 'favorites/favorite-btn', book: @book) %>");
+
+
+<%# #ID名で特定のIDを指定
+<%#.htmlメソッドで要素内に挿入する HTML 文字列を指定して、IDの内容を置き換える　%>
